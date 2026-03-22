@@ -4,256 +4,213 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador Tributação Mínima | Saraiva & Motti Fernandes Advogados Associados</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-            --bg: #0A0A0B;
-            --bg-card: #111113;
-            --bg-input: #18181B;
-            --border: rgba(255,255,255,0.06);
-            --border-hover: rgba(255,255,255,0.12);
-            --border-glow: rgba(255,255,255,0.08);
-            --text: #FAFAFA;
-            --text-secondary: rgba(255,255,255,0.55);
-            --text-muted: rgba(255,255,255,0.35);
-            --accent-green: #22C55E;
-            --accent-green-dim: rgba(34,197,94,0.15);
-            --accent-red: #EF4444;
-            --accent-red-dim: rgba(239,68,68,0.15);
-            --accent-amber: #F59E0B;
-            --accent-amber-dim: rgba(245,158,11,0.12);
-            --white: #FAFAFA;
+            --dark: #2E323D;
+            --black: #302E2F;
+            --offwhite: #EEF0EF;
+            --gray: #DADADA;
+            --gray-mid: #8a8d94;
+            --gray-hint: #aeb0b3;
+            --gray-light: #c0c1c3;
+            --gray-panel: #6b6d70;
+            --sep-dark: #3d4150;
+            --red: #e07070;
+            --green: #7ec88b;
+            --white: #FFFFFF;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
-            color: var(--text);
+            font-family: 'Roboto', sans-serif;
+            background: var(--offwhite);
+            color: var(--black);
             line-height: 1.6;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ===== TOP BAR ===== */
+        /* ===== HEADER ===== */
         .top-bar {
-            background: transparent;
-            border-bottom: 1px solid var(--border);
-            padding: 14px 28px;
+            background: var(--dark);
+            padding: 24px 40px;
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: space-between;
-            backdrop-filter: blur(12px);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background: rgba(10,10,11,0.85);
         }
 
         .top-bar-logo { display: flex; flex-direction: column; }
 
         .top-bar-name {
             font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 3px;
+            font-weight: 300;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            color: var(--text);
+            color: var(--gray);
             white-space: nowrap;
         }
 
-        .top-bar-amp {
-            font-weight: 300;
-            color: var(--text-muted);
-            margin: 0 1px;
-        }
+        .top-bar-amp { color: var(--gray-panel); }
 
         .top-bar-type {
             font-size: 9px;
             font-weight: 400;
-            letter-spacing: 2.5px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            color: var(--text-muted);
-            margin-top: 1px;
-        }
-
-        .logo-img {
-            width: 36px;
-            height: 36px;
-            object-fit: contain;
-            border-radius: 6px;
+            color: var(--gray-panel);
+            margin-top: 3px;
         }
 
         .top-bar-right {
-            font-size: 11px;
-            color: var(--text-muted);
+            font-size: 9px;
+            color: var(--gray-panel);
             text-align: right;
-            font-weight: 400;
+            letter-spacing: 1.5px;
+            line-height: 1.6;
         }
 
         /* ===== HERO ===== */
         .hero {
-            padding: 72px 24px 56px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            background: var(--offwhite);
+            padding: 64px 40px 56px;
+            display: flex;
+            gap: 48px;
+            align-items: flex-start;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -120px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            height: 400px;
-            background: radial-gradient(ellipse, rgba(255,255,255,0.03) 0%, transparent 70%);
-            pointer-events: none;
+        .hero-left { flex: 1; }
+
+        .hero-tag {
+            font-size: 10px;
+            font-weight: 400;
+            color: var(--gray-hint);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 32px;
         }
 
         .hero h1 {
-            font-size: 40px;
-            font-weight: 800;
-            color: var(--text);
-            letter-spacing: -1px;
-            margin-bottom: 8px;
-            line-height: 1.1;
+            font-size: 32px;
+            font-weight: 300;
+            color: var(--black);
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            margin-bottom: 0;
         }
 
-        .hero-brand {
+        .hero-line {
+            width: 40px;
+            height: 1px;
+            background: var(--black);
+            margin: 24px 0;
+        }
+
+        .hero-desc {
             font-size: 13px;
-            font-weight: 400;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
+            font-weight: 300;
+            color: var(--gray-mid);
+            line-height: 1.8;
+            max-width: 340px;
         }
 
-        .hero p {
-            font-size: 15px;
-            color: var(--text-muted);
-            max-width: 480px;
-            margin: 0 auto;
+        .hero-right {
+            min-width: 140px;
+            border-left: 1px solid var(--gray);
+            padding-left: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding-top: 40px;
+        }
+
+        .hero-metric-label {
+            font-size: 11px;
+            color: var(--gray-hint);
             font-weight: 400;
         }
 
-        .hero-badge {
-            display: inline-block;
-            margin-top: 20px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
+        .hero-metric-value {
+            font-size: 20px;
+            font-weight: 300;
+            color: var(--black);
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .hero-disclaimer {
             font-size: 10px;
-            font-weight: 500;
-            letter-spacing: 1.5px;
-            padding: 6px 16px;
-            border-radius: 100px;
+            font-weight: 300;
+            color: var(--gray-hint);
+            padding: 0 40px 20px;
+            background: var(--offwhite);
         }
 
-        /* ===== NOTICE ===== */
-        .notice-bar {
-            background: var(--accent-amber-dim);
-            border-bottom: 1px solid rgba(245,158,11,0.15);
-            padding: 10px 24px;
-            text-align: center;
-            font-size: 12px;
-            color: var(--accent-amber);
-            font-weight: 500;
+        /* ===== SECTIONS ===== */
+        .section {
+            background: var(--white);
+            margin-top: 2px;
         }
-
-        /* ===== LAYOUT ===== */
-        .container {
-            max-width: 920px;
-            margin: 0 auto;
-            padding: 40px 20px 60px;
-        }
-
-        /* ===== SECTION ===== */
-        .section { margin-bottom: 32px; }
 
         .section-header {
+            padding: 28px 40px 0;
             display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-            padding-bottom: 14px;
-            border-bottom: 1px dashed var(--border-hover);
+            align-items: baseline;
+            gap: 16px;
         }
 
         .section-num {
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            font-weight: 700;
-            flex-shrink: 0;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
+            font-size: 32px;
+            font-weight: 300;
+            color: var(--gray);
+            font-family: 'Roboto Mono', monospace;
+            line-height: 1;
         }
 
         .section-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text);
-            flex: 1;
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--black);
+            letter-spacing: 0.3px;
+        }
+
+        .section-sub {
+            font-size: 11px;
+            font-weight: 300;
+            color: var(--gray-hint);
         }
 
         .section-badge {
             font-size: 10px;
-            font-weight: 500;
-            background: rgba(255,255,255,0.04);
-            color: var(--text-muted);
-            padding: 3px 10px;
-            border-radius: 100px;
-            border: 1px solid var(--border);
+            font-weight: 400;
+            color: var(--gray-hint);
+            letter-spacing: 1px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            margin-left: auto;
         }
 
-        .section-body {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
-            transition: border-color 0.3s;
-        }
-
-        .section-body:hover {
-            border-color: var(--border-hover);
-        }
+        .section-body { padding: 12px 40px 36px; }
 
         /* ===== ALERT ===== */
         .info-box {
-            background: var(--accent-amber-dim);
-            border: 1px solid rgba(245,158,11,0.15);
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 13px;
-            color: var(--accent-amber);
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
+            margin: 20px 0;
+            padding-left: 16px;
+            border-left: 2px solid var(--gray);
+            font-size: 12px;
+            font-weight: 300;
+            color: var(--gray-mid);
+            line-height: 1.7;
         }
 
-        .info-box .icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+        .info-box .icon { display: none; }
+        .info-box strong { font-weight: 400; color: var(--black); }
 
         /* ===== FORM ===== */
         .field-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-
-        @media (max-width: 640px) {
-            .field-row { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 28px; }
-            .resultado-grid, .resultado-bottom { grid-template-columns: 1fr; }
+            gap: 28px 40px;
+            margin-bottom: 8px;
         }
 
         .field { display: flex; flex-direction: column; }
@@ -261,148 +218,158 @@
 
         .field-label {
             font-size: 11px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-weight: 400;
+            color: var(--gray-mid);
+            letter-spacing: 0.3px;
+            margin-bottom: 4px;
         }
 
         .field-input {
             display: flex;
             align-items: center;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.2s;
+            border: none;
+            border-bottom: 1px solid var(--gray);
+            background: transparent;
+            transition: border-color 0.2s;
         }
 
         .field-input:focus-within {
-            border-color: rgba(255,255,255,0.2);
-            box-shadow: 0 0 0 3px rgba(255,255,255,0.03);
+            border-bottom-color: var(--black);
         }
 
         .field-input .prefix {
-            padding: 10px 11px;
             font-size: 13px;
-            color: var(--text-muted);
-            font-weight: 500;
-            border-right: 1px solid var(--border);
+            font-weight: 300;
+            color: var(--gray);
+            margin-right: 8px;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .field-input:focus-within .prefix {
+            color: var(--black);
         }
 
         .field-input input {
             flex: 1;
             border: none;
             outline: none;
-            padding: 10px 11px;
-            font-size: 14px;
-            font-family: 'Inter', sans-serif;
-            color: var(--text);
+            padding: 10px 0;
+            font-size: 15px;
+            font-weight: 300;
+            font-family: 'Roboto Mono', monospace;
+            color: var(--black);
             background: transparent;
             min-width: 0;
         }
 
+        .field-input input::placeholder { color: var(--gray); }
+
         .field-hint {
             font-size: 11px;
-            color: var(--text-muted);
+            font-weight: 300;
+            color: var(--gray-light);
             margin-top: 4px;
         }
 
         .field-select {
             width: 100%;
-            padding: 10px 11px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
+            padding: 10px 0;
+            border: none;
+            border-bottom: 1px solid var(--gray);
             font-size: 13px;
-            font-family: 'Inter', sans-serif;
-            color: var(--text);
-            background: var(--bg-input);
+            font-weight: 300;
+            font-family: 'Roboto', sans-serif;
+            color: var(--black);
+            background: transparent;
             cursor: pointer;
             outline: none;
+            -webkit-appearance: none;
         }
 
-        .field-select:focus {
-            border-color: rgba(255,255,255,0.2);
-            box-shadow: 0 0 0 3px rgba(255,255,255,0.03);
-        }
+        .field-select:focus { border-bottom-color: var(--black); }
 
         /* ===== TOTALS ===== */
         .total-strip {
             display: flex;
             justify-content: flex-end;
-            align-items: center;
+            align-items: baseline;
             gap: 16px;
-            padding: 14px 16px;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            margin-top: 12px;
+            margin-top: 32px;
+            padding-top: 20px;
+            border-top: 1px solid var(--offwhite);
         }
 
         .total-strip .label {
             font-size: 10px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            color: var(--text-muted);
+            font-weight: 400;
+            letter-spacing: 3px;
+            color: var(--gray-hint);
             text-transform: uppercase;
         }
 
-        .total-strip .value { font-size: 22px; font-weight: 700; }
-        .total-strip .status { font-size: 11px; font-weight: 500; }
+        .total-strip .value {
+            font-size: 24px;
+            font-weight: 300;
+            font-family: 'Roboto Mono', monospace;
+            letter-spacing: -1px;
+        }
 
-        .color-green { color: var(--accent-green); }
-        .color-red { color: var(--accent-red); }
-        .color-amber { color: var(--accent-amber); }
-        .color-dark { color: var(--text); }
+        .total-strip .status {
+            font-size: 10px;
+            font-weight: 400;
+            color: var(--gray-hint);
+        }
+
+        .color-green { color: var(--green); }
+        .color-red { color: var(--red); }
+        .color-amber { color: #d4930d; }
+        .color-dark { color: var(--black); }
 
         /* ===== PJ CARD ===== */
         .pj-entry {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 18px;
-            margin-bottom: 14px;
+            border-bottom: 1px solid var(--offwhite);
+            padding: 20px 0;
+            margin-bottom: 8px;
         }
 
         .pj-entry-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 14px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border);
+            margin-bottom: 16px;
         }
 
-        .pj-entry-title { font-weight: 600; font-size: 14px; color: var(--text); }
+        .pj-entry-title {
+            font-weight: 400;
+            font-size: 13px;
+            color: var(--black);
+        }
 
         .btn-delete {
-            background: var(--accent-red-dim);
-            border: 1px solid rgba(239,68,68,0.2);
-            color: var(--accent-red);
+            background: transparent;
+            border: 1px solid var(--red);
+            color: var(--red);
             cursor: pointer;
-            font-size: 12px;
+            font-size: 11px;
             padding: 4px 12px;
-            border-radius: 6px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
             transition: all 0.2s;
         }
 
-        .btn-delete:hover { background: rgba(239,68,68,0.25); }
+        .btn-delete:hover { background: var(--red); color: var(--white); }
 
         .pj-rate-box {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 8px 14px;
+            border-top: 1px solid var(--offwhite);
+            border-bottom: 1px solid var(--offwhite);
+            padding: 10px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 10px 0;
+            margin: 12px 0;
             font-size: 13px;
-            color: var(--text-secondary);
-            font-weight: 500;
+            color: var(--black);
+            font-weight: 400;
         }
 
         /* ===== BUTTONS ===== */
@@ -410,53 +377,45 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 500;
+            padding: 8px 16px;
+            font-size: 11px;
+            font-weight: 400;
             cursor: pointer;
             transition: all 0.2s;
-            font-family: 'Inter', sans-serif;
-            border: 1px solid var(--border-hover);
-            background: rgba(255,255,255,0.04);
-            color: var(--text-secondary);
+            font-family: 'Roboto', sans-serif;
+            border: 1px solid var(--gray);
+            background: transparent;
+            color: var(--black);
         }
 
-        .btn-action:hover {
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(255,255,255,0.2);
-            color: var(--text);
-        }
+        .btn-action:hover { background: var(--black); color: var(--white); border-color: var(--black); }
 
         .btn-link {
             background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-weight: 500;
+            border: 1px solid var(--gray);
+            color: var(--black);
+            font-weight: 400;
             cursor: pointer;
-            font-size: 13px;
-            font-family: 'Inter', sans-serif;
-            text-decoration: underline;
-            text-underline-offset: 3px;
-            text-decoration-color: rgba(255,255,255,0.2);
-            transition: color 0.2s;
+            font-size: 11px;
+            font-family: 'Roboto', sans-serif;
+            padding: 8px 16px;
+            transition: all 0.2s;
         }
 
-        .btn-link:hover { color: var(--text); }
+        .btn-link:hover { background: var(--black); color: var(--white); border-color: var(--black); }
 
         /* ===== REDUTOR ===== */
         .redutor-placeholder {
             text-align: center;
-            padding: 24px;
-            color: var(--text-muted);
+            padding: 28px 0;
+            color: var(--gray-mid);
             font-size: 13px;
+            font-weight: 300;
         }
 
         .redutor-summary {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 14px 18px;
+            border-top: 1px solid var(--offwhite);
+            padding: 16px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -465,190 +424,207 @@
 
         /* ===== RESULTADO ===== */
         .resultado {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px 28px;
-            margin-bottom: 32px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .resultado::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            background: var(--dark);
+            padding: 40px;
+            margin-top: 2px;
         }
 
         .resultado-header {
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: 2px;
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid var(--border);
+            color: var(--gray-panel);
+            margin-bottom: 36px;
         }
 
         .resultado-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            display: flex;
+            gap: 0;
+            margin-bottom: 32px;
+        }
+
+        .resultado-metric {
+            flex: 1;
+        }
+
+        .resultado-metric + .resultado-metric {
+            padding-left: 40px;
+            border-left: 1px solid var(--sep-dark);
         }
 
         .resultado-metric .rlabel {
-            font-size: 10px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--text-muted);
+            font-size: 11px;
+            color: var(--gray-panel);
             font-weight: 400;
         }
 
         .resultado-metric .rvalue {
             font-size: 28px;
-            font-weight: 700;
-            margin-top: 4px;
-            letter-spacing: -0.5px;
+            font-weight: 300;
+            color: var(--offwhite);
+            font-family: 'Roboto Mono', monospace;
+            letter-spacing: -1px;
+            margin-top: 6px;
         }
 
         .resultado-metric .rvalue-sm {
             font-size: 20px;
-            font-weight: 700;
-            margin-top: 4px;
+            font-weight: 300;
+            color: var(--offwhite);
+            font-family: 'Roboto Mono', monospace;
+            margin-top: 6px;
         }
 
         /* Demo table */
         .demo-table {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 18px;
-            font-size: 12px;
+            border-top: 1px solid var(--sep-dark);
+            padding-top: 24px;
+            margin-bottom: 32px;
         }
 
         .demo-table-title {
-            font-weight: 600;
-            font-size: 11px;
-            letter-spacing: 1px;
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            margin-bottom: 12px;
-            color: var(--text-muted);
+            color: var(--gray-panel);
+            margin-bottom: 16px;
         }
 
         .demo-row {
             display: flex;
             justify-content: space-between;
-            padding: 5px 0;
-            font-family: 'SF Mono', 'Fira Code', monospace;
-            font-size: 11px;
-            color: var(--text-secondary);
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            font-size: 13px;
+            font-weight: 300;
         }
+
+        .demo-row span:first-child { color: var(--gray-mid); }
+        .demo-row span:last-child { font-family: 'Roboto Mono', monospace; color: var(--offwhite); }
 
         .demo-row.sep {
-            border-top: 1px solid var(--border);
-            margin-top: 6px;
-            padding-top: 10px;
-            font-weight: 700;
-            color: var(--text);
+            border-bottom: none;
+            border-top: 1px solid var(--sep-dark);
+            margin-top: 4px;
+            padding-top: 12px;
+            font-weight: 400;
         }
 
-        .demo-neg { color: var(--accent-red); }
-        .demo-final { color: var(--accent-green); }
+        .demo-row.sep span:last-child { font-size: 14px; font-weight: 400; }
+
+        .demo-neg { color: var(--green) !important; }
+        .demo-final { color: var(--offwhite) !important; }
 
         /* Bottom boxes */
         .resultado-bottom {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
-            margin-top: 24px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border);
+            margin-top: 32px;
         }
 
-        .resultado-box {
-            padding: 20px;
-            border-radius: 12px;
-        }
+        .resultado-box { padding: 24px; }
 
-        .resultado-box.pay {
-            background: var(--accent-red-dim);
-            border: 1px solid rgba(239,68,68,0.15);
-        }
-
-        .resultado-box.refund {
-            background: var(--accent-green-dim);
-            border: 1px solid rgba(34,197,94,0.15);
-        }
+        .resultado-box.pay { border: 1px solid var(--red); }
+        .resultado-box.refund { border: 1px solid var(--green); }
 
         .resultado-box .box-label {
-            font-size: 10px;
-            letter-spacing: 0.8px;
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            color: var(--text-muted);
-            font-weight: 500;
         }
 
+        .resultado-box.pay .box-label { color: var(--red); }
+        .resultado-box.refund .box-label { color: var(--green); }
+
         .resultado-box .box-value {
-            font-size: 28px;
-            font-weight: 700;
-            margin-top: 6px;
-            letter-spacing: -0.5px;
+            font-size: 26px;
+            font-weight: 300;
+            font-family: 'Roboto Mono', monospace;
+            margin-top: 8px;
         }
 
         .resultado-box .box-hint {
             font-size: 11px;
-            color: var(--text-muted);
+            font-weight: 300;
+            color: var(--gray-panel);
             margin-top: 6px;
         }
 
         .resultado-footer {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
-            margin-top: 20px;
-            padding-top: 14px;
-            border-top: 1px solid var(--border);
-            font-size: 11px;
-            color: var(--text-muted);
+            margin-top: 24px;
+            gap: 20px;
+        }
+
+        .resultado-footer span {
+            font-size: 10px;
+            color: var(--gray-panel);
         }
 
         .btn-pdf {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid var(--border-hover);
-            color: var(--text-secondary);
+            background: transparent;
+            border: 1px solid var(--sep-dark);
+            color: var(--gray-panel);
             cursor: pointer;
-            font-size: 12px;
-            font-family: 'Inter', sans-serif;
-            padding: 7px 16px;
-            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 400;
+            font-family: 'Roboto', sans-serif;
+            padding: 8px 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             transition: all 0.2s;
         }
 
-        .btn-pdf:hover { background: rgba(255,255,255,0.08); color: var(--text); }
+        .btn-pdf:hover { border-color: var(--gray); color: var(--gray); }
 
         /* ===== FOOTER ===== */
         .page-footer {
-            border-top: 1px solid var(--border);
-            color: var(--text-muted);
-            text-align: center;
-            padding: 32px 24px;
-            font-size: 12px;
+            background: var(--offwhite);
+            padding: 36px 40px;
         }
 
-        .page-footer strong { color: var(--text-secondary); font-weight: 500; }
+        .page-footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-name {
+            font-size: 12px;
+            font-weight: 300;
+            color: var(--black);
+            letter-spacing: 2px;
+        }
+
+        .footer-type {
+            font-size: 10px;
+            font-weight: 300;
+            color: var(--gray-hint);
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        .footer-ref {
+            font-size: 10px;
+            font-weight: 300;
+            color: var(--gray-hint);
+            text-align: right;
+        }
 
         .page-footer .legal {
             font-size: 10px;
-            color: var(--text-muted);
-            margin-top: 12px;
-            max-width: 560px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-            opacity: 0.7;
+            font-weight: 300;
+            color: var(--gray-hint);
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--gray);
+            line-height: 1.7;
         }
 
         /* ===== TOOLTIP ===== */
@@ -656,12 +632,10 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            border: 1px solid var(--border-hover);
-            font-size: 11px;
-            color: var(--text-muted);
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
+            color: var(--gray-hint);
             cursor: help;
             position: relative;
             vertical-align: middle;
@@ -674,331 +648,354 @@
             display: none;
             position: absolute;
             right: 0;
-            top: 24px;
-            background: #1C1C1F;
-            color: var(--text-secondary);
-            padding: 12px 14px;
-            border-radius: 10px;
+            top: 22px;
+            background: var(--dark);
+            color: var(--gray);
+            padding: 14px 16px;
             font-size: 11px;
             width: 260px;
             z-index: 10;
-            font-weight: 400;
-            line-height: 1.5;
-            border: 1px solid var(--border-hover);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; padding: 40px 24px 32px; gap: 32px; }
+            .hero-right { border-left: none; padding-left: 0; border-top: 1px solid var(--gray); padding-top: 24px; flex-direction: row; gap: 32px; }
+            .hero h1 { font-size: 26px; }
+            .top-bar { padding: 16px 24px; }
+            .top-bar-name { font-size: 12px; letter-spacing: 2px; }
+            .section-header { padding: 24px 24px 0; }
+            .section-body { padding: 12px 24px 28px; }
+            .field-row { grid-template-columns: 1fr; gap: 20px; }
+            .resultado { padding: 28px 24px; }
+            .resultado-grid { flex-direction: column; gap: 20px; }
+            .resultado-metric + .resultado-metric { padding-left: 0; border-left: none; padding-top: 20px; border-top: 1px solid var(--sep-dark); }
+            .resultado-bottom { grid-template-columns: 1fr; }
+            .page-footer { padding: 28px 24px; }
+            .page-footer-top { flex-direction: column; gap: 12px; }
+            .footer-ref { text-align: left; }
+            .hero-disclaimer { padding: 0 24px 16px; }
         }
 
         /* ===== PRINT ===== */
         @media print {
-            .notice-bar, .btn-pdf, .tip-trigger, .btn-action, .btn-link, .btn-delete { display: none !important; }
-            body { background: white; color: black; }
-            .resultado, .section-body, .top-bar { border-color: #ccc; }
-            .top-bar { background: #333; }
+            .btn-pdf, .tip-trigger, .btn-action, .btn-link, .btn-delete { display: none !important; }
+            body { background: white; }
+            .resultado { break-inside: avoid; }
+            .top-bar { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
         }
     </style>
 </head>
 <body>
 
-<!-- Top Bar with Logo -->
+<!-- Header -->
 <div class="top-bar">
-    <div style="display:flex;align-items:center;gap:16px;">
-        <!-- Logo Icon (adicione o arquivo assets/logo.png para exibir) -->
-        <img src="assets/logo.png" alt="" class="logo-img" onerror="this.style.display='none'">
-        <div class="top-bar-logo">
-            <div class="top-bar-name">SARAIVA <span class="top-bar-amp">&amp;</span> MOTTI FERNANDES</div>
-            <div class="top-bar-type">ADVOGADOS ASSOCIADOS</div>
-        </div>
+    <div class="top-bar-logo">
+        <div class="top-bar-name">SARAIVA <span class="top-bar-amp">&amp;</span> MOTTI FERNANDES</div>
+        <div class="top-bar-type">ADVOGADOS ASSOCIADOS</div>
     </div>
-    <div class="top-bar-right">Lei 15.270/2025<br>Exerc. 2027</div>
+    <div class="top-bar-right">Lei 15.270/2025<br>Exerc&iacute;cio 2027</div>
 </div>
 
 <!-- Hero -->
 <div class="hero">
-    <h1>Simulador de Tributação Mínima</h1>
-    <p class="hero-brand">Saraiva &amp; Motti Fernandes Advogados Associados</p>
-    <p>Calcule o impacto da tributação mínima sobre altas rendas conforme os Arts. 16-A e 16-B da Lei n.º 9.250/95</p>
-    <div class="hero-badge">FERRAMENTA GRATUITA</div>
+    <div class="hero-left">
+        <div class="hero-tag">FERRAMENTA GRATUITA</div>
+        <h1>Simulador de<br>Tributa&ccedil;&atilde;o M&iacute;nima</h1>
+        <div class="hero-line"></div>
+        <p class="hero-desc">Calcule o impacto da tributa&ccedil;&atilde;o m&iacute;nima sobre altas rendas conforme os Arts. 16-A e 16-B da Lei n.&ordm; 9.250/95</p>
+    </div>
+    <div class="hero-right">
+        <div>
+            <div class="hero-metric-label">Isen&ccedil;&atilde;o</div>
+            <div class="hero-metric-value">600k</div>
+        </div>
+        <div>
+            <div class="hero-metric-label">Al&iacute;quota m&aacute;x.</div>
+            <div class="hero-metric-value">10%</div>
+        </div>
+        <div>
+            <div class="hero-metric-label">Al&iacute;quota cheia</div>
+            <div class="hero-metric-value">1.2M+</div>
+        </div>
+    </div>
 </div>
+<div class="hero-disclaimer">Simula&ccedil;&atilde;o meramente ilustrativa. N&atilde;o substitui a apura&ccedil;&atilde;o oficial nem consultoria profissional.</div>
 
-<!-- Notice -->
-<div class="notice-bar">
-    Simulação meramente ilustrativa. Não substitui a apuração oficial nem consultoria profissional.
-</div>
-
-<!-- Main -->
-<div class="container">
-
-    <!-- SECTION 1: Rendimentos -->
-    <div class="section">
-        <div class="section-header">
-            <div class="section-num">1</div>
-            <div class="section-title">
-                Rendimentos (Base Art. 16-A)
-                <span class="tip-trigger">?
-                    <span class="tip-content">
-                        Inclua todos os rendimentos que compõem a base da tributação mínima.<br><br>
-                        <strong>Exclua:</strong> dividendos de resultados até 2025, poupança, LCI/LCA, FIIs/FIAGRO isentos.
-                    </span>
+<!-- SECTION 1: Rendimentos -->
+<div class="section">
+    <div class="section-header">
+        <div class="section-num">01</div>
+        <div class="section-title">
+            Rendimentos
+            <span class="tip-trigger">?
+                <span class="tip-content">
+                    Inclua todos os rendimentos que comp&otilde;em a base da tributa&ccedil;&atilde;o m&iacute;nima.<br><br>
+                    <strong>Exclua:</strong> dividendos de resultados at&eacute; 2025, poupan&ccedil;a, LCI/LCA, FIIs/FIAGRO isentos.
                 </span>
+            </span>
+        </div>
+        <div class="section-sub">Base Art. 16-A</div>
+    </div>
+    <div class="section-body">
+        <div class="info-box">
+            <span class="icon"></span>
+            <span><strong>Aten&ccedil;&atilde;o:</strong> N&atilde;o inclua rendimentos exclu&iacute;dos pela lei (ex: dividendos de resultados at&eacute; 2025, poupan&ccedil;a, LCI/LCA, FIIs/FIAGRO isentos, etc.).</span>
+        </div>
+        <div class="field-row">
+            <div class="field">
+                <label class="field-label">Rendimentos tribut&aacute;veis (Ajuste Anual)</label>
+                <div class="field-input">
+                    <span class="prefix">R$</span>
+                    <input type="text" id="rendTrib" value="0,00" oninput="formatCurrency(this); calculate()">
+                </div>
+                <span class="field-hint">Sal&aacute;rios, alugu&eacute;is, pens&otilde;es, pro labore, etc.</span>
+            </div>
+            <div class="field">
+                <label class="field-label">Resultado da Atividade Rural</label>
+                <div class="field-input">
+                    <span class="prefix">R$</span>
+                    <input type="text" id="rendRural" value="0,00" oninput="formatCurrency(this); calculate()">
+                </div>
+                <span class="field-hint">Base de c&aacute;lculo conforme Lei 8.023/90</span>
             </div>
         </div>
-        <div class="section-body">
-            <div class="info-box">
-                <span class="icon">&#9888;</span>
-                <span><strong>Atenção:</strong> Não inclua rendimentos excluídos pela lei (ex: dividendos de resultados até 2025, poupança, LCI/LCA, FIIs/FIAGRO isentos, etc.).</span>
-            </div>
-            <div class="field-row">
-                <div class="field">
-                    <label class="field-label">Rendimentos tributáveis (Ajuste Anual)</label>
-                    <div class="field-input">
-                        <span class="prefix">R$</span>
-                        <input type="text" id="rendTrib" value="0,00" oninput="formatCurrency(this); calculate()">
-                    </div>
-                    <span class="field-hint">Salários, aluguéis, pensões, pro labore, etc.</span>
+        <div class="field-row">
+            <div class="field">
+                <label class="field-label">Rend. Exclusivos na Fonte</label>
+                <div class="field-input">
+                    <span class="prefix">R$</span>
+                    <input type="text" id="rendExcl" value="0,00" oninput="formatCurrency(this); calculate()">
                 </div>
-                <div class="field">
-                    <label class="field-label">Resultado da Atividade Rural</label>
-                    <div class="field-input">
-                        <span class="prefix">R$</span>
-                        <input type="text" id="rendRural" value="0,00" oninput="formatCurrency(this); calculate()">
-                    </div>
-                    <span class="field-hint">Base de cálculo conforme Lei 8.023/90</span>
+                <span class="field-hint">Ex: Aplica&ccedil;&otilde;es financeiras n&atilde;o isentas, JCP, etc.</span>
+            </div>
+            <div class="field">
+                <label class="field-label">Dividendos de 2026 em diante</label>
+                <div class="field-input">
+                    <span class="prefix">R$</span>
+                    <input type="text" id="dividendos" value="0,00" oninput="formatCurrency(this); calculate()">
                 </div>
             </div>
-            <div class="field-row">
-                <div class="field">
-                    <label class="field-label">Rend. Exclusivos na Fonte</label>
-                    <div class="field-input">
-                        <span class="prefix">R$</span>
-                        <input type="text" id="rendExcl" value="0,00" oninput="formatCurrency(this); calculate()">
-                    </div>
-                    <span class="field-hint">Ex: Aplicações financeiras não isentas, JCP, etc.</span>
+        </div>
+        <div class="field-row">
+            <div class="field">
+                <label class="field-label">Outros Rendimentos</label>
+                <div class="field-input">
+                    <span class="prefix">R$</span>
+                    <input type="text" id="outrosRend" value="0,00" oninput="formatCurrency(this); calculate()">
                 </div>
-                <div class="field">
-                    <label class="field-label">Dividendos de 2026 em diante</label>
-                    <div class="field-input">
-                        <span class="prefix">R$</span>
-                        <input type="text" id="dividendos" value="0,00" oninput="formatCurrency(this); calculate()">
-                    </div>
-                </div>
+                <span class="field-hint">Outras verbas que comp&otilde;em a base da tributa&ccedil;&atilde;o m&iacute;nima</span>
             </div>
-            <div class="field-row">
-                <div class="field">
-                    <label class="field-label">Outros Rendimentos</label>
-                    <div class="field-input">
-                        <span class="prefix">R$</span>
-                        <input type="text" id="outrosRend" value="0,00" oninput="formatCurrency(this); calculate()">
-                    </div>
-                    <span class="field-hint">Outras verbas que compõem a base da tributação mínima</span>
+        </div>
+        <div class="total-strip">
+            <span class="label">RENDA TOTAL (REND)</span>
+            <span class="value color-green" id="rendaTotal">R$ 0,00</span>
+            <span class="status color-green" id="rendaHint">Isento de tributa&ccedil;&atilde;o m&iacute;nima (&le; R$ 600k)</span>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 2: Impostos Pagos -->
+<div class="section">
+    <div class="section-header">
+        <div class="section-num">02</div>
+        <div class="section-title">Impostos Pagos / Dedut&iacute;veis</div>
+    </div>
+    <div class="section-body">
+        <div class="field-row">
+            <div class="field">
+                <label class="field-label">IRPF Ajuste Anual (Normal)</label>
+                <div class="field-input">
+                    <span class="prefix">R$</span>
+                    <input type="text" id="irpfAjuste" value="0,00" oninput="formatCurrency(this); calculate()">
                 </div>
+                <span class="field-hint">Imposto devido na tabela progressiva</span>
             </div>
-            <div class="total-strip">
-                <span class="label">RENDA TOTAL (REND)</span>
-                <span class="value color-green" id="rendaTotal">R$ 0,00</span>
-                <span class="status color-green" id="rendaHint">Isento de tributação mínima (&le; R$ 600k)</span>
+            <div class="field">
+                <label class="field-label">IRRF Exclusivo na Fonte</label>
+                <div class="field-input">
+                    <span class="prefix">R$</span>
+                    <input type="text" id="irrfExcl" value="0,00" oninput="formatCurrency(this); calculate()">
+                </div>
+                <span class="field-hint">Sobre rendimentos inclu&iacute;dos na base acima</span>
+            </div>
+        </div>
+        <div class="field-row">
+            <div class="field">
+                <label class="field-label">IRPF Lei 14.754 (Offshore/Trust)</label>
+                <div class="field-input">
+                    <span class="prefix">R$</span>
+                    <input type="text" id="irpfOffshore" value="0,00" oninput="formatCurrency(this); calculate()">
+                </div>
+                <span class="field-hint">Referente a rendimentos inclu&iacute;dos na base</span>
+            </div>
+            <div class="field">
+                <label class="field-label">IRPF Definitivo / Outros</label>
+                <div class="field-input">
+                    <span class="prefix">R$</span>
+                    <input type="text" id="irpfDef" value="0,00" oninput="formatCurrency(this); calculate()">
+                </div>
+                <span class="field-hint">Sobre rendimentos inclu&iacute;dos na base</span>
+            </div>
+        </div>
+        <div class="field-row">
+            <div class="field span-full">
+                <label class="field-label">IRRF Antecipado Dividendos (Art. 6&ordm;-A)</label>
+                <div class="field-input">
+                    <span class="prefix">R$</span>
+                    <input type="text" id="irrfAntecipado" value="0,00" oninput="formatCurrency(this); calculate()">
+                </div>
+                <span class="field-hint">Reten&ccedil;&atilde;o mensal de 10% paga pelas PJs (deduzido ao final)</span>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- SECTION 2: Impostos Pagos -->
-    <div class="section">
-        <div class="section-header">
-            <div class="section-num">2</div>
-            <div class="section-title">Impostos Pagos / Dedutíveis</div>
+<!-- SECTION 3: Redutor -->
+<div class="section">
+    <div class="section-header">
+        <div class="section-num">03</div>
+        <div class="section-title">C&aacute;lculo do Redutor</div>
+        <div class="section-sub">Art. 16-B</div>
+        <span class="section-badge">Opcional</span>
+    </div>
+    <div class="section-body">
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
+            <button class="btn-link" onclick="addPJ()">+ Adicionar PJ</button>
         </div>
-        <div class="section-body">
-            <div class="field-row">
-                <div class="field">
-                    <label class="field-label">IRPF Ajuste Anual (Normal)</label>
-                    <div class="field-input">
-                        <span class="prefix">R$</span>
-                        <input type="text" id="irpfAjuste" value="0,00" oninput="formatCurrency(this); calculate()">
-                    </div>
-                    <span class="field-hint">Imposto devido na tabela progressiva</span>
+
+        <div id="pjContainer"></div>
+
+        <div class="redutor-placeholder" id="redutorIntro">
+            Caso tenha recebido dividendos de PJs com carga tribut&aacute;ria efetiva elevada, voc&ecirc; pode ter direito a um redutor.
+            <br><br>
+            <button class="btn-action" onclick="addPJ()">+ Simular Redutor</button>
+        </div>
+
+        <div class="redutor-summary" id="redutorTotalBox" style="display: none;">
+            <span class="label" style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gray-hint);">Redutor Total Calculado</span>
+            <span class="value color-dark" style="font-size:20px;font-weight:300;font-family:'Roboto Mono',monospace;" id="redutorTotal">R$ 0,00</span>
+        </div>
+        <p id="redutorHint" style="display:none; text-align:right; font-size:10px; color:var(--gray-hint); margin-top:4px;">* Deduzido automaticamente do imposto m&iacute;nimo.</p>
+    </div>
+</div>
+
+<!-- SECTION 4: Restituição -->
+<div class="section">
+    <div class="section-header">
+        <div class="section-num">04</div>
+        <div class="section-title">Estimativa de Restitui&ccedil;&atilde;o IRPF</div>
+    </div>
+    <div class="section-body">
+        <div class="info-box">
+            <span class="icon"></span>
+            <span>Informe o IR retido na fonte ao longo do ano e o imposto efetivamente devido para estimar se h&aacute; restitui&ccedil;&atilde;o ou imposto complementar a pagar.</span>
+        </div>
+        <div class="field-row">
+            <div class="field">
+                <label class="field-label">Total de IR Retido na Fonte (ano)</label>
+                <div class="field-input">
+                    <span class="prefix">R$</span>
+                    <input type="text" id="irRetido" value="0,00" oninput="formatCurrency(this); calculate()">
                 </div>
-                <div class="field">
-                    <label class="field-label">IRRF Exclusivo na Fonte</label>
-                    <div class="field-input">
-                        <span class="prefix">R$</span>
-                        <input type="text" id="irrfExcl" value="0,00" oninput="formatCurrency(this); calculate()">
-                    </div>
-                    <span class="field-hint">Sobre rendimentos incluídos na base acima</span>
-                </div>
+                <span class="field-hint">Soma de todos os IRRFs retidos nos informes de rendimentos</span>
             </div>
-            <div class="field-row">
-                <div class="field">
-                    <label class="field-label">IRPF Lei 14.754 (Offshore/Trust)</label>
-                    <div class="field-input">
-                        <span class="prefix">R$</span>
-                        <input type="text" id="irpfOffshore" value="0,00" oninput="formatCurrency(this); calculate()">
-                    </div>
-                    <span class="field-hint">Referente a rendimentos incluídos na base</span>
+            <div class="field">
+                <label class="field-label">Imposto Devido na Declara&ccedil;&atilde;o (IRPF)</label>
+                <div class="field-input">
+                    <span class="prefix">R$</span>
+                    <input type="text" id="irDevido" value="0,00" oninput="formatCurrency(this); calculate()">
                 </div>
-                <div class="field">
-                    <label class="field-label">IRPF Definitivo / Outros</label>
-                    <div class="field-input">
-                        <span class="prefix">R$</span>
-                        <input type="text" id="irpfDef" value="0,00" oninput="formatCurrency(this); calculate()">
-                    </div>
-                    <span class="field-hint">Sobre rendimentos incluídos na base</span>
-                </div>
+                <span class="field-hint">Imposto calculado ap&oacute;s dedu&ccedil;&otilde;es na declara&ccedil;&atilde;o anual</span>
             </div>
-            <div class="field-row">
-                <div class="field span-full">
-                    <label class="field-label">IRRF Antecipado Dividendos (Art. 6&ordm;-A)</label>
-                    <div class="field-input">
-                        <span class="prefix">R$</span>
-                        <input type="text" id="irrfAntecipado" value="0,00" oninput="formatCurrency(this); calculate()">
-                    </div>
-                    <span class="field-hint">Retenção mensal de 10% paga pelas PJs (deduzido ao final)</span>
-                </div>
-            </div>
+        </div>
+        <div class="total-strip" id="restituicaoStrip">
+            <span class="label">RESULTADO IRPF</span>
+            <span class="value color-green" id="restituicaoValor">R$ 0,00</span>
+            <span class="status color-green" id="restituicaoStatus">Sem valores informados</span>
+        </div>
+    </div>
+</div>
+
+<!-- RESULTADO -->
+<div class="resultado">
+    <div class="resultado-header">Resultado da Simula&ccedil;&atilde;o</div>
+
+    <div class="resultado-grid">
+        <div class="resultado-metric">
+            <div class="rlabel">Renda total</div>
+            <div class="rvalue" id="resRendaTotal">R$ 0,00</div>
+        </div>
+        <div class="resultado-metric">
+            <div class="rlabel">Al&iacute;quota m&iacute;nima</div>
+            <div class="rvalue-sm" id="resAliquota">0,00%</div>
+        </div>
+        <div class="resultado-metric">
+            <div class="rlabel">Imposto bruto</div>
+            <div class="rvalue-sm" id="resImpostoBruto">R$ 0,00</div>
         </div>
     </div>
 
-    <!-- SECTION 3: Redutor -->
-    <div class="section">
-        <div class="section-header">
-            <div class="section-num">3</div>
-            <div class="section-title">Cálculo do Redutor (Art. 16-B)</div>
-            <span class="section-badge">Opcional</span>
+    <div class="demo-table">
+        <div class="demo-table-title">Demonstrativo</div>
+        <div class="demo-row">
+            <span>(+) Imposto M&iacute;nimo Bruto</span>
+            <span id="demoImpostoBruto">R$ 0,00</span>
         </div>
-        <div class="section-body">
-            <div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
-                <button class="btn-link" onclick="addPJ()">+ Adicionar PJ</button>
-            </div>
-
-            <div id="pjContainer"></div>
-
-            <div class="redutor-placeholder" id="redutorIntro">
-                Caso tenha recebido dividendos de PJs com carga tributária efetiva elevada, você pode ter direito a um redutor.
-                <br><br>
-                <button class="btn-action" onclick="addPJ()">+ Simular Redutor</button>
-            </div>
-
-            <div class="redutor-summary" id="redutorTotalBox" style="display: none;">
-                <span class="label" style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);">Redutor Total Calculado</span>
-                <span class="value color-dark" style="font-size:20px;font-weight:700;" id="redutorTotal">R$ 0,00</span>
-            </div>
-            <p id="redutorHint" style="display:none; text-align:right; font-size:10px; color:var(--text-muted); margin-top:4px;">* Deduzido automaticamente do imposto mínimo.</p>
+        <div class="demo-row">
+            <span>(-) Impostos Normais (Se&ccedil;&atilde;o 2)</span>
+            <span class="demo-neg" id="demoImpostosNormais">- R$ 0,00</span>
         </div>
-    </div>
-
-    <!-- SECTION 4: Restituição IRPF -->
-    <div class="section">
-        <div class="section-header">
-            <div class="section-num">4</div>
-            <div class="section-title">Estimativa de Restituição IRPF</div>
-            <span class="section-badge">Novo</span>
+        <div class="demo-row" id="demoRedutorRow" style="display:none;">
+            <span>(-) Redutor (Art. 16-B)</span>
+            <span class="demo-neg" id="demoRedutor">- R$ 0,00</span>
         </div>
-        <div class="section-body">
-            <div class="info-box" style="background: var(--accent-green-light); border-color: #C8E6C9; color: #1B5E20;">
-                <span class="icon">&#9432;</span>
-                <span>Informe o IR retido na fonte ao longo do ano e o imposto efetivamente devido para estimar se há restituição ou imposto complementar a pagar.</span>
-            </div>
-            <div class="field-row">
-                <div class="field">
-                    <label class="field-label">Total de IR Retido na Fonte (ano)</label>
-                    <div class="field-input">
-                        <span class="prefix">R$</span>
-                        <input type="text" id="irRetido" value="0,00" oninput="formatCurrency(this); calculate()">
-                    </div>
-                    <span class="field-hint">Soma de todos os IRRFs retidos nos informes de rendimentos</span>
-                </div>
-                <div class="field">
-                    <label class="field-label">Imposto Devido na Declaração (IRPF)</label>
-                    <div class="field-input">
-                        <span class="prefix">R$</span>
-                        <input type="text" id="irDevido" value="0,00" oninput="formatCurrency(this); calculate()">
-                    </div>
-                    <span class="field-hint">Imposto calculado após deduções na declaração anual</span>
-                </div>
-            </div>
-            <div class="total-strip" id="restituicaoStrip">
-                <span class="label">RESULTADO IRPF</span>
-                <span class="value color-green" id="restituicaoValor">R$ 0,00</span>
-                <span class="status color-green" id="restituicaoStatus">Sem valores informados</span>
-            </div>
+        <div class="demo-row sep">
+            <span>(=) Subtotal</span>
+            <span id="demoSubtotal">R$ 0,00</span>
+        </div>
+        <div class="demo-row" id="demoAntecipacaoRow" style="display:none;">
+            <span>(-) IRRF Antecipado (Art. 6&ordm;-A)</span>
+            <span class="demo-neg" id="demoAntecipacao">- R$ 0,00</span>
+        </div>
+        <div class="demo-row sep">
+            <span>(=) IMPOSTO M&Iacute;NIMO FINAL</span>
+            <span class="demo-final" id="demoFinal">R$ 0,00</span>
         </div>
     </div>
 
-    <!-- RESULTADO -->
-    <div class="resultado">
-        <div class="resultado-header">Resultado da Simulação</div>
-
-        <div class="resultado-grid">
-            <div class="resultado-metric">
-                <div class="rlabel">RENDA TOTAL (REND)</div>
-                <div class="rvalue" id="resRendaTotal">R$ 0,00</div>
-            </div>
-            <div class="demo-table">
-                <div class="demo-table-title">Demonstrativo</div>
-                <div class="demo-row">
-                    <span>(+) Imposto Mínimo Bruto</span>
-                    <span id="demoImpostoBruto">R$ 0,00</span>
-                </div>
-                <div class="demo-row">
-                    <span>(-) Impostos Normais (Seção 2)</span>
-                    <span class="demo-neg" id="demoImpostosNormais">- R$ 0,00</span>
-                </div>
-                <div class="demo-row" id="demoRedutorRow" style="display:none;">
-                    <span>(-) Redutor (Art. 16-B)</span>
-                    <span class="demo-neg" id="demoRedutor">- R$ 0,00</span>
-                </div>
-                <div class="demo-row sep">
-                    <span>(=) Subtotal</span>
-                    <span id="demoSubtotal">R$ 0,00</span>
-                </div>
-                <div class="demo-row" id="demoAntecipacaoRow" style="display:none;">
-                    <span>(-) IRRF Antecipado (Art. 6&ordm;-A)</span>
-                    <span class="demo-neg" id="demoAntecipacao">- R$ 0,00</span>
-                </div>
-                <div class="demo-row sep">
-                    <span>(=) IMPOSTO MÍNIMO FINAL</span>
-                    <span class="demo-final" id="demoFinal">R$ 0,00</span>
-                </div>
-            </div>
+    <div class="resultado-bottom">
+        <div class="resultado-box pay">
+            <div class="box-label">ADICIONAL A PAGAR (TRIBUTA&Ccedil;&Atilde;O M&Iacute;NIMA)</div>
+            <div class="box-value" id="resAdicional" style="color: var(--red);">R$ 0,00</div>
+            <div class="box-hint">Some ao IRPF apurado na declara&ccedil;&atilde;o.</div>
         </div>
-
-        <div style="display:flex;gap:24px;margin-top:20px;">
-            <div class="resultado-metric">
-                <div class="rlabel">ALÍQUOTA MÍNIMA</div>
-                <div class="rvalue-sm" id="resAliquota">0,00%</div>
-            </div>
-            <div class="resultado-metric">
-                <div class="rlabel">IMPOSTO BRUTO</div>
-                <div class="rvalue-sm" id="resImpostoBruto">R$ 0,00</div>
-            </div>
-        </div>
-
-        <!-- Bottom boxes: Adicional + Restituição -->
-        <div class="resultado-bottom">
-            <div class="resultado-box pay">
-                <div class="box-label">ADICIONAL A PAGAR (TRIBUTAÇÃO MÍNIMA)</div>
-                <div class="box-value" id="resAdicional" style="color: #EF9A9A;">R$ 0,00</div>
-                <div class="box-hint">Some ao IRPF apurado na declaração.</div>
-            </div>
-            <div class="resultado-box refund">
-                <div class="box-label">ESTIMATIVA RESTITUIÇÃO IRPF</div>
-                <div class="box-value" id="resRestituicao" style="color: #81C784;">R$ 0,00</div>
-                <div class="box-hint" id="resRestituicaoHint">Valor estimado a restituir.</div>
-            </div>
-        </div>
-
-        <div class="resultado-footer">
-            <span>Exercício 2027 (Ano-calendário 2026)</span>
-            <button class="btn-pdf" onclick="window.print()">Imprimir / Salvar PDF</button>
+        <div class="resultado-box refund">
+            <div class="box-label">ESTIMATIVA RESTITUI&Ccedil;&Atilde;O IRPF</div>
+            <div class="box-value" id="resRestituicao" style="color: var(--green);">R$ 0,00</div>
+            <div class="box-hint" id="resRestituicaoHint">Valor estimado a restituir.</div>
         </div>
     </div>
 
+    <div class="resultado-footer">
+        <span>Exerc&iacute;cio 2027 (Ano-calend&aacute;rio 2026)</span>
+        <button class="btn-pdf" onclick="window.print()">Imprimir / Salvar PDF</button>
+    </div>
 </div>
 
 <!-- Footer -->
 <div class="page-footer">
-    <p>Simulador de Tributação Mínima &mdash; Lei 15.270/2025</p>
-    <p style="margin-top:4px;">Desenvolvido por <strong>Saraiva &amp; Motti Fernandes Advogados Associados</strong></p>
+    <div class="page-footer-top">
+        <div>
+            <div class="footer-name">SARAIVA &amp; MOTTI FERNANDES</div>
+            <div class="footer-type">Advogados Associados</div>
+        </div>
+        <div class="footer-ref">Simulador de Tributa&ccedil;&atilde;o M&iacute;nima<br>Lei 15.270/2025</div>
+    </div>
     <p class="legal">
-        AVISO LEGAL: Esta ferramenta foi desenvolvida para fins didáticos e ilustrativos. Os cálculos consideram premissas simplificadas e podem não cobrir todas as particularidades da legislação tributária. Para a apuração oficial do imposto e tomada de decisões financeiras, consulte um contador ou advogado tributarista de sua confiança.
+        AVISO LEGAL: Esta ferramenta foi desenvolvida para fins did&aacute;ticos e ilustrativos. Os c&aacute;lculos consideram premissas simplificadas e podem n&atilde;o cobrir todas as particularidades da legisla&ccedil;&atilde;o tribut&aacute;ria. Para a apura&ccedil;&atilde;o oficial do imposto e tomada de decis&otilde;es financeiras, consulte um contador ou advogado tributarista de sua confian&ccedil;a.
     </p>
 </div>
 
@@ -1035,26 +1032,26 @@
         div.id = 'pj-' + id;
         div.innerHTML = `
             <div class="pj-entry-header">
-                <span class="pj-entry-title">Dados da Pessoa Jurídica #${id}</span>
+                <span class="pj-entry-title">Dados da Pessoa Jur\u00eddica #${id}</span>
                 <button class="btn-delete" onclick="removePJ(${id})">Remover</button>
             </div>
             <div class="field" style="margin-bottom:10px;">
                 <label class="field-label">Nome da Empresa (Opcional)</label>
                 <div class="field-input">
-                    <input type="text" placeholder="Ex: Minha Empresa LTDA" style="padding-left:12px;">
+                    <input type="text" placeholder="Ex: Minha Empresa LTDA">
                 </div>
             </div>
             <div class="field" style="margin-bottom:10px;">
                 <label class="field-label">Setor (Limite Nominal)</label>
                 <select class="field-select" id="pjSetor-${id}" onchange="calculate()">
                     <option value="0.34">Demais empresas (34%)</option>
-                    <option value="0.40">Instituições financeiras e similares (40%)</option>
-                    <option value="0.45">Seguradoras, capitalização e similares (45%)</option>
+                    <option value="0.40">Institui\u00e7\u00f5es financeiras e similares (40%)</option>
+                    <option value="0.45">Seguradoras, capitaliza\u00e7\u00e3o e similares (45%)</option>
                 </select>
             </div>
             <div class="field-row">
                 <div class="field">
-                    <label class="field-label">Lucro Contábil do Exercício</label>
+                    <label class="field-label">Lucro Cont\u00e1bil do Exerc\u00edcio</label>
                     <div class="field-input">
                         <span class="prefix">R$</span>
                         <input type="text" id="pjLucro-${id}" value="0,00" oninput="formatCurrency(this); calculate()">
@@ -1071,7 +1068,7 @@
                 </div>
             </div>
             <div class="pj-rate-box">
-                <span>Alíquota Efetiva da PJ:</span>
+                <span>Al\u00edquota Efetiva da PJ:</span>
                 <span id="pjAliquota-${id}">0,00%</span>
             </div>
             <div class="field" style="margin-top:10px;">
@@ -1080,7 +1077,7 @@
                     <span class="prefix">R$</span>
                     <input type="text" id="pjDividendos-${id}" value="0,00" oninput="formatCurrency(this); calculate()">
                 </div>
-                <span class="field-hint">Valor pago pela PJ à Pessoa Física no ano</span>
+                <span class="field-hint">Valor pago pela PJ \u00e0 Pessoa F\u00edsica no ano</span>
             </div>
         `;
         document.getElementById('pjContainer').appendChild(div);
@@ -1113,20 +1110,20 @@
         const rendaTotal = document.getElementById('rendaTotal');
 
         if (REND <= 600000) {
-            rendaHint.textContent = 'Isento de tributação mínima (\u2264 R$ 600k)';
+            rendaHint.textContent = 'Isento de tributa\u00e7\u00e3o m\u00ednima (\u2264 R$ 600k)';
             rendaHint.className = 'status color-green';
             rendaTotal.className = 'value color-green';
         } else if (REND >= 1200000) {
-            rendaHint.textContent = 'Alíquota máxima de 10% aplicável';
+            rendaHint.textContent = 'Al\u00edquota m\u00e1xima de 10% aplic\u00e1vel';
             rendaHint.className = 'status color-red';
             rendaTotal.className = 'value color-red';
         } else {
-            rendaHint.textContent = 'Faixa de transição (alíquota progressiva)';
+            rendaHint.textContent = 'Faixa de transi\u00e7\u00e3o (al\u00edquota progressiva)';
             rendaHint.className = 'status color-amber';
             rendaTotal.className = 'value color-amber';
         }
 
-        // 2. Alíquota Mínima
+        // 2. Al\u00edquota M\u00ednima
         let aliquota = 0;
         if (REND <= 600000) {
             aliquota = 0;
@@ -1168,15 +1165,14 @@
         }
         document.getElementById('redutorTotal').textContent = 'R$ ' + formatBRL(redutorTotal);
 
-        // 6. Cálculo final tributação mínima
+        // 6. C\u00e1lculo final tributa\u00e7\u00e3o m\u00ednima
         const subtotalAntesAntecipacao = Math.max(0, impostoBruto - impostosNormais - redutorTotal);
         const impostoFinal = Math.max(0, subtotalAntesAntecipacao - irrfAntecipado);
 
-        // 7. Restituição IRPF
+        // 7. Restitui\u00e7\u00e3o IRPF
         const irRetido = parseCurrency(document.getElementById('irRetido').value);
         const irDevido = parseCurrency(document.getElementById('irDevido').value);
         const restituicaoBruta = irRetido - irDevido;
-        // Restituição líquida considera o adicional da tributação mínima
         const restituicaoLiquida = restituicaoBruta - impostoFinal;
 
         const restValEl = document.getElementById('restituicaoValor');
@@ -1190,7 +1186,7 @@
         } else if (restituicaoBruta > 0) {
             restValEl.textContent = 'R$ ' + formatBRL(restituicaoBruta);
             restValEl.className = 'value color-green';
-            restStatEl.textContent = 'Restituição estimada';
+            restStatEl.textContent = 'Restitui\u00e7\u00e3o estimada';
             restStatEl.className = 'status color-green';
         } else if (restituicaoBruta < 0) {
             restValEl.textContent = 'R$ ' + formatBRL(Math.abs(restituicaoBruta));
@@ -1212,27 +1208,26 @@
 
         const resAdicional = document.getElementById('resAdicional');
         resAdicional.textContent = 'R$ ' + formatBRL(impostoFinal);
-        resAdicional.style.color = impostoFinal > 0 ? '#EF9A9A' : '#81C784';
+        resAdicional.style.color = impostoFinal > 0 ? 'var(--red)' : 'var(--green)';
 
-        // Restituição no resultado (líquida = restituição bruta - adicional tributação mínima)
         const resRestEl = document.getElementById('resRestituicao');
         const resRestHint = document.getElementById('resRestituicaoHint');
 
         if (irRetido === 0 && irDevido === 0) {
             resRestEl.textContent = 'R$ 0,00';
-            resRestEl.style.color = '#81C784';
-            resRestHint.textContent = 'Preencha a Seção 4 para estimar.';
+            resRestEl.style.color = 'var(--green)';
+            resRestHint.textContent = 'Preencha a Se\u00e7\u00e3o 4 para estimar.';
         } else if (restituicaoLiquida > 0) {
             resRestEl.textContent = 'R$ ' + formatBRL(restituicaoLiquida);
-            resRestEl.style.color = '#81C784';
-            resRestHint.textContent = 'Restituição líquida estimada (já descontado adicional).';
+            resRestEl.style.color = 'var(--green)';
+            resRestHint.textContent = 'Restitui\u00e7\u00e3o l\u00edquida estimada (j\u00e1 descontado adicional).';
         } else if (restituicaoLiquida < 0) {
             resRestEl.textContent = '- R$ ' + formatBRL(Math.abs(restituicaoLiquida));
-            resRestEl.style.color = '#EF9A9A';
+            resRestEl.style.color = 'var(--red)';
             resRestHint.textContent = 'Saldo devedor estimado (imposto + adicional).';
         } else {
             resRestEl.textContent = 'R$ 0,00';
-            resRestEl.style.color = '#81C784';
+            resRestEl.style.color = 'var(--green)';
             resRestHint.textContent = 'Sem saldo.';
         }
 
