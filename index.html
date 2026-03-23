@@ -1006,6 +1006,7 @@
                     <input type="text" id="irRetido" value="0,00" oninput="formatCurrency(this); calculate()">
                 </div>
                 <span class="field-hint">Soma de todos os IRRFs retidos nos informes de rendimentos</span>
+                <span class="field-hint" style="color:var(--red); font-size:10px; margin-top:2px; display:block;"><strong>Aten&ccedil;&atilde;o:</strong> N&atilde;o inclua aqui o IRRF antecipado sobre dividendos (art. 6&ordm;-A), j&aacute; informado na Se&ccedil;&atilde;o 2.</span>
             </div>
             <div class="field">
                 <label class="field-label">Imposto Devido na Declara&ccedil;&atilde;o (IRPF)</label>
@@ -1073,9 +1074,9 @@
 
     <div class="resultado-bottom">
         <div class="resultado-box pay">
-            <div class="box-label">ADICIONAL A PAGAR (TRIBUTA&Ccedil;&Atilde;O M&Iacute;NIMA)</div>
+            <div class="box-label" id="resAdicionalLabel">ADICIONAL A PAGAR (TRIBUTA&Ccedil;&Atilde;O M&Iacute;NIMA)</div>
             <div class="box-value" id="resAdicional" style="color: var(--red);">R$ 0,00</div>
-            <div class="box-hint">Some ao IRPF apurado na declara&ccedil;&atilde;o.</div>
+            <div class="box-hint" id="resAdicionalHint">Some ao IRPF apurado na declara&ccedil;&atilde;o.</div>
         </div>
         <div class="resultado-box refund">
             <div class="box-label">ESTIMATIVA RESTITUI&Ccedil;&Atilde;O IRPF</div>
@@ -1150,8 +1151,8 @@
                 <label class="field-label">Setor (Limite Nominal)</label>
                 <select class="field-select" id="pjSetor-${id}" onchange="calculate()">
                     <option value="0.34">Demais empresas (34%)</option>
-                    <option value="0.40">Institui\u00e7\u00f5es financeiras e similares (40%)</option>
-                    <option value="0.45">Seguradoras, capitaliza\u00e7\u00e3o e similares (45%)</option>
+                    <option value="0.40">Seguradoras, capitaliza\u00e7\u00e3o e similares (40%)</option>
+                    <option value="0.45">Bancos de qualquer esp\u00e9cie (45%)</option>
                 </select>
             </div>
             <div class="field-row">
@@ -1272,7 +1273,7 @@
 
         // 6. C\u00e1lculo final tributa\u00e7\u00e3o m\u00ednima
         const subtotalAntesAntecipacao = Math.max(0, impostoBruto - impostosNormais - redutorTotal);
-        const impostoFinal = Math.max(0, subtotalAntesAntecipacao - irrfAntecipado);
+        const impostoFinal = subtotalAntesAntecipacao - irrfAntecipado;
 
         // 7. Restitui\u00e7\u00e3o IRPF
         const irRetido = parseCurrency(document.getElementById('irRetido').value);
@@ -1288,15 +1289,15 @@
             restValEl.className = 'value color-green';
             restStatEl.textContent = 'Sem valores informados';
             restStatEl.className = 'status color-green';
-        } else if (restituicaoBruta > 0) {
-            restValEl.textContent = 'R$ ' + formatBRL(restituicaoBruta);
+        } else if (restituicaoLiquida > 0) {
+            restValEl.textContent = 'R$ ' + formatBRL(restituicaoLiquida);
             restValEl.className = 'value color-green';
-            restStatEl.textContent = 'Restitui\u00e7\u00e3o estimada';
+            restStatEl.textContent = impostoFinal !== 0 ? 'Restitui\u00e7\u00e3o estimada (j\u00e1 considerado adicional/cr\u00e9dito)' : 'Restitui\u00e7\u00e3o estimada';
             restStatEl.className = 'status color-green';
-        } else if (restituicaoBruta < 0) {
-            restValEl.textContent = 'R$ ' + formatBRL(Math.abs(restituicaoBruta));
+        } else if (restituicaoLiquida < 0) {
+            restValEl.textContent = 'R$ ' + formatBRL(Math.abs(restituicaoLiquida));
             restValEl.className = 'value color-red';
-            restStatEl.textContent = 'Imposto complementar a pagar';
+            restStatEl.textContent = impostoFinal > 0 ? 'Saldo devedor (incl. adicional tributa\u00e7\u00e3o m\u00ednima)' : 'Imposto complementar a pagar';
             restStatEl.className = 'status color-red';
         } else {
             restValEl.textContent = 'R$ 0,00';
@@ -1312,8 +1313,24 @@
         document.getElementById('resImpostoBruto').textContent = 'R$ ' + formatBRL(impostoBruto);
 
         const resAdicional = document.getElementById('resAdicional');
-        resAdicional.textContent = 'R$ ' + formatBRL(impostoFinal);
-        resAdicional.style.color = impostoFinal > 0 ? 'var(--red)' : 'var(--green)';
+        const resAdicionalLabel = document.getElementById('resAdicionalLabel');
+        const resAdicionalHint = document.getElementById('resAdicionalHint');
+        if (impostoFinal > 0) {
+            resAdicional.textContent = 'R$ ' + formatBRL(impostoFinal);
+            resAdicional.style.color = 'var(--red)';
+            resAdicionalLabel.textContent = 'ADICIONAL A PAGAR (TRIBUTA\u00c7\u00c3O M\u00cdNIMA)';
+            resAdicionalHint.textContent = 'Some ao IRPF apurado na declara\u00e7\u00e3o.';
+        } else if (impostoFinal < 0) {
+            resAdicional.textContent = 'R$ ' + formatBRL(Math.abs(impostoFinal));
+            resAdicional.style.color = 'var(--green)';
+            resAdicionalLabel.textContent = 'CR\u00c9DITO IRRF ANTECIPADO EXCEDENTE';
+            resAdicionalHint.textContent = 'Valor a ser restitu\u00eddo ou compensado na declara\u00e7\u00e3o (art. 16-A, \u00a7\u00a75\u00ba-6\u00ba).';
+        } else {
+            resAdicional.textContent = 'R$ 0,00';
+            resAdicional.style.color = 'var(--green)';
+            resAdicionalLabel.textContent = 'ADICIONAL A PAGAR (TRIBUTA\u00c7\u00c3O M\u00cdNIMA)';
+            resAdicionalHint.textContent = 'Nenhum adicional devido.';
+        }
 
         const resRestEl = document.getElementById('resRestituicao');
         const resRestHint = document.getElementById('resRestituicaoHint');
@@ -1358,7 +1375,14 @@
             demoAntecipacaoRow.style.display = 'none';
         }
 
-        document.getElementById('demoFinal').textContent = 'R$ ' + formatBRL(impostoFinal);
+        const demoFinalEl = document.getElementById('demoFinal');
+        if (impostoFinal < 0) {
+            demoFinalEl.textContent = '- R$ ' + formatBRL(Math.abs(impostoFinal));
+            demoFinalEl.style.color = 'var(--green)';
+        } else {
+            demoFinalEl.textContent = 'R$ ' + formatBRL(impostoFinal);
+            demoFinalEl.style.color = '';
+        }
     }
 
     // Init
