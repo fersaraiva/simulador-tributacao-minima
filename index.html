@@ -661,22 +661,127 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .hero { flex-direction: column; padding: 40px 24px 32px; gap: 32px; }
-            .hero-right { border-left: none; padding-left: 0; border-top: 1px solid var(--gray); padding-top: 24px; flex-direction: row; gap: 32px; }
-            .hero h1 { font-size: 26px; }
-            .top-bar { padding: 16px 24px; }
-            .top-bar-name { font-size: 12px; letter-spacing: 2px; }
-            .section-header { padding: 24px 24px 0; }
-            .section-body { padding: 12px 24px 28px; }
-            .field-row { grid-template-columns: 1fr; gap: 20px; }
-            .resultado { padding: 28px 24px; }
-            .resultado-grid { flex-direction: column; gap: 20px; }
-            .resultado-metric + .resultado-metric { padding-left: 0; border-left: none; padding-top: 20px; border-top: 1px solid var(--sep-dark); }
-            .resultado-bottom { grid-template-columns: 1fr; }
-            .page-footer { padding: 28px 24px; }
-            .page-footer-top { flex-direction: column; gap: 12px; }
-            .footer-ref { text-align: left; }
-            .hero-disclaimer { padding: 0 24px 16px; }
+            /* Header */
+            .top-bar { padding: 16px 20px; flex-wrap: wrap; gap: 8px; }
+            .top-bar-name { font-size: 11px; letter-spacing: 2px; }
+            .top-bar-type { font-size: 8px; letter-spacing: 2px; }
+            .top-bar-right { font-size: 8px; }
+
+            /* Hero */
+            .hero { flex-direction: column; padding: 36px 20px 28px; gap: 28px; }
+            .hero h1 { font-size: 24px; }
+            .hero-tag { font-size: 9px; letter-spacing: 3px; margin-bottom: 20px; }
+            .hero-line { margin: 16px 0; }
+            .hero-desc { font-size: 12px; max-width: 100%; }
+            .hero-right {
+                border-left: none;
+                padding-left: 0;
+                border-top: 1px solid var(--gray);
+                padding-top: 20px;
+                flex-direction: row;
+                gap: 0;
+                justify-content: space-between;
+            }
+            .hero-right > div { text-align: center; flex: 1; }
+            .hero-metric-value { font-size: 18px; }
+            .hero-metric-label { font-size: 10px; }
+            .hero-disclaimer { padding: 0 20px 14px; font-size: 9px; }
+
+            /* Sections */
+            .section-header { padding: 20px 20px 0; gap: 10px; flex-wrap: wrap; }
+            .section-num { font-size: 24px; }
+            .section-title { font-size: 14px; }
+            .section-sub { font-size: 10px; }
+            .section-body { padding: 12px 20px 28px; }
+
+            /* Alert */
+            .info-box { margin: 16px 0; font-size: 11px; padding-left: 12px; }
+
+            /* Form fields */
+            .field-row { grid-template-columns: 1fr; gap: 16px; }
+            .field-label { font-size: 10px; }
+            .field-input input { font-size: 14px; padding: 8px 0; }
+            .field-input .prefix { font-size: 12px; }
+            .field-hint { font-size: 10px; }
+
+            /* Totals */
+            .total-strip {
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 4px;
+                margin-top: 24px;
+                padding-top: 16px;
+            }
+            .total-strip .label { font-size: 9px; letter-spacing: 2px; }
+            .total-strip .value { font-size: 20px; }
+            .total-strip .status { font-size: 9px; }
+
+            /* PJ entries */
+            .pj-entry { padding: 16px 0; }
+            .pj-entry-title { font-size: 12px; }
+            .pj-rate-box { font-size: 12px; padding: 8px 0; }
+
+            /* Redutor */
+            .redutor-placeholder { font-size: 12px; padding: 20px 0; }
+
+            /* Resultado */
+            .resultado { padding: 24px 20px; }
+            .resultado-header { font-size: 9px; letter-spacing: 3px; margin-bottom: 24px; }
+            .resultado-grid { flex-direction: column; gap: 16px; }
+            .resultado-metric + .resultado-metric {
+                padding-left: 0;
+                border-left: none;
+                padding-top: 16px;
+                border-top: 1px solid var(--sep-dark);
+            }
+            .resultado-metric .rlabel { font-size: 10px; }
+            .resultado-metric .rvalue { font-size: 22px; }
+            .resultado-metric .rvalue-sm { font-size: 18px; }
+
+            /* Demo table */
+            .demo-table { padding-top: 20px; }
+            .demo-row { font-size: 11px; padding: 8px 0; }
+            .demo-row.sep span:last-child { font-size: 12px; }
+
+            /* Bottom boxes */
+            .resultado-bottom { grid-template-columns: 1fr; gap: 12px; margin-top: 24px; }
+            .resultado-box { padding: 18px; }
+            .resultado-box .box-label { font-size: 8px; letter-spacing: 2px; }
+            .resultado-box .box-value { font-size: 22px; }
+            .resultado-box .box-hint { font-size: 10px; }
+
+            /* Footer resultado */
+            .resultado-footer { flex-direction: column; align-items: flex-end; gap: 10px; }
+            .resultado-footer span { font-size: 9px; }
+
+            /* Page footer */
+            .page-footer { padding: 24px 20px; }
+            .page-footer-top { flex-direction: column; gap: 10px; }
+            .footer-name { font-size: 11px; }
+            .footer-ref { text-align: left; font-size: 9px; }
+            .page-footer .legal { font-size: 9px; margin-top: 16px; padding-top: 12px; }
+
+            /* Tooltip mobile: wider and positioned better */
+            .tip-content { width: 220px; right: -10px; }
+
+            /* Select on mobile */
+            .field-select { font-size: 12px; padding: 8px 0; }
+
+            /* Buttons */
+            .btn-action { font-size: 10px; padding: 7px 14px; }
+            .btn-link { font-size: 10px; padding: 7px 14px; }
+            .btn-pdf { font-size: 9px; padding: 6px 14px; letter-spacing: 1px; }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 380px) {
+            .top-bar-name { font-size: 10px; letter-spacing: 1.5px; }
+            .hero h1 { font-size: 22px; }
+            .hero-metric-value { font-size: 16px; }
+            .resultado-metric .rvalue { font-size: 20px; }
+            .resultado-box .box-value { font-size: 20px; }
+            .section-header { gap: 8px; }
+            .section-num { font-size: 20px; }
         }
 
         /* ===== PRINT ===== */
