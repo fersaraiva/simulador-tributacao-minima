@@ -987,43 +987,11 @@
     </div>
 </div>
 
-<!-- SECTION 4: Restituição -->
-<div class="section">
-    <div class="section-header">
-        <div class="section-num">04</div>
-        <div class="section-title">Estimativa de Restitui&ccedil;&atilde;o IRPF</div>
-    </div>
-    <div class="section-body">
-        <div class="info-box">
-            <span class="icon"></span>
-            <span>Informe o IR retido na fonte ao longo do ano e o imposto efetivamente devido para estimar se h&aacute; restitui&ccedil;&atilde;o ou imposto complementar a pagar.</span>
-        </div>
-        <div class="field-row">
-            <div class="field">
-                <label class="field-label">Total de IR Retido na Fonte (ano)</label>
-                <div class="field-input">
-                    <span class="prefix">R$</span>
-                    <input type="text" id="irRetido" value="0,00" oninput="formatCurrency(this); calculate()">
-                </div>
-                <span class="field-hint">Soma de todos os IRRFs retidos nos informes de rendimentos</span>
-                <span class="field-hint" style="color:var(--red); font-size:10px; margin-top:2px; display:block;"><strong>Aten&ccedil;&atilde;o:</strong> N&atilde;o inclua aqui o IRRF antecipado sobre dividendos (art. 6&ordm;-A), j&aacute; informado na Se&ccedil;&atilde;o 2.</span>
-            </div>
-            <div class="field">
-                <label class="field-label">Imposto Devido na Declara&ccedil;&atilde;o (IRPF)</label>
-                <div class="field-input">
-                    <span class="prefix">R$</span>
-                    <input type="text" id="irDevido" value="0,00" oninput="formatCurrency(this); calculate()">
-                </div>
-                <span class="field-hint">Imposto calculado ap&oacute;s dedu&ccedil;&otilde;es na declara&ccedil;&atilde;o anual</span>
-            </div>
-        </div>
-        <div class="total-strip" id="restituicaoStrip">
-            <span class="label">RESULTADO IRPF</span>
-            <span class="value color-green" id="restituicaoValor">R$ 0,00</span>
-            <span class="status color-green" id="restituicaoStatus">Sem valores informados</span>
-        </div>
-    </div>
-</div>
+<!-- Hidden inputs to preserve JS compatibility -->
+<input type="hidden" id="irRetido" value="0,00">
+<input type="hidden" id="irDevido" value="0,00">
+<span id="restituicaoValor" style="display:none;"></span>
+<span id="restituicaoStatus" style="display:none;"></span>
 
 <!-- RESULTADO -->
 <div class="resultado">
@@ -1072,18 +1040,16 @@
         </div>
     </div>
 
-    <div class="resultado-bottom">
-        <div class="resultado-box pay">
+    <div class="resultado-bottom" style="grid-template-columns: 1fr;">
+        <div class="resultado-box pay" id="resAdicionalBox">
             <div class="box-label" id="resAdicionalLabel">ADICIONAL A PAGAR (TRIBUTA&Ccedil;&Atilde;O M&Iacute;NIMA)</div>
             <div class="box-value" id="resAdicional" style="color: var(--red);">R$ 0,00</div>
             <div class="box-hint" id="resAdicionalHint">Some ao IRPF apurado na declara&ccedil;&atilde;o.</div>
         </div>
-        <div class="resultado-box refund">
-            <div class="box-label">ESTIMATIVA RESTITUI&Ccedil;&Atilde;O IRPF</div>
-            <div class="box-value" id="resRestituicao" style="color: var(--green);">R$ 0,00</div>
-            <div class="box-hint" id="resRestituicaoHint">Valor estimado a restituir.</div>
-        </div>
     </div>
+    <!-- Hidden elements to preserve JS compatibility -->
+    <span id="resRestituicao" style="display:none;"></span>
+    <span id="resRestituicaoHint" style="display:none;"></span>
 
     <div class="resultado-footer">
         <span>Exerc&iacute;cio 2027 (Ano-calend&aacute;rio 2026)</span>
@@ -1315,21 +1281,25 @@
         const resAdicional = document.getElementById('resAdicional');
         const resAdicionalLabel = document.getElementById('resAdicionalLabel');
         const resAdicionalHint = document.getElementById('resAdicionalHint');
+        const resAdicionalBox = document.getElementById('resAdicionalBox');
         if (impostoFinal > 0) {
             resAdicional.textContent = 'R$ ' + formatBRL(impostoFinal);
             resAdicional.style.color = 'var(--red)';
             resAdicionalLabel.textContent = 'ADICIONAL A PAGAR (TRIBUTA\u00c7\u00c3O M\u00cdNIMA)';
             resAdicionalHint.textContent = 'Some ao IRPF apurado na declara\u00e7\u00e3o.';
+            resAdicionalBox.className = 'resultado-box pay';
         } else if (impostoFinal < 0) {
             resAdicional.textContent = 'R$ ' + formatBRL(Math.abs(impostoFinal));
             resAdicional.style.color = 'var(--green)';
             resAdicionalLabel.textContent = 'CR\u00c9DITO IRRF ANTECIPADO EXCEDENTE';
             resAdicionalHint.textContent = 'Valor a ser restitu\u00eddo ou compensado na declara\u00e7\u00e3o (art. 16-A, \u00a7\u00a75\u00ba-6\u00ba).';
+            resAdicionalBox.className = 'resultado-box refund';
         } else {
             resAdicional.textContent = 'R$ 0,00';
             resAdicional.style.color = 'var(--green)';
             resAdicionalLabel.textContent = 'ADICIONAL A PAGAR (TRIBUTA\u00c7\u00c3O M\u00cdNIMA)';
             resAdicionalHint.textContent = 'Nenhum adicional devido.';
+            resAdicionalBox.className = 'resultado-box pay';
         }
 
         const resRestEl = document.getElementById('resRestituicao');
